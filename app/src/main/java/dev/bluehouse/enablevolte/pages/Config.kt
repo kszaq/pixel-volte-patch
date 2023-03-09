@@ -135,7 +135,7 @@ fun Config(navController: NavController, subId: Int) {
                 true
             }
         }
-        BooleanPropertyView(label = stringResource(R.string.show_wifi_only_for_vowifi), toggled = supportWfcWifiOnly)
+        BooleanPropertyView(label = stringResource(R.string.show_wifi_only_for_vowifi), toggled = supportWfcWifiOnly) {
             supportWfcWifiOnly = if (supportWfcWifiOnly) {
                 moder.updateCarrierConfig(CarrierConfigManager.KEY_CARRIER_WFC_SUPPORTS_WIFI_ONLY_BOOL, false)
                 false

@@ -49,6 +49,8 @@ fun Config(navController: NavController, subId: Int) {
     var supportWfcWifiOnly by rememberSaveable { mutableStateOf(false) }
     var vtEnabled by rememberSaveable { mutableStateOf(false) }
     var ssOverUtEnabled by rememberSaveable { mutableStateOf(false) }
+    var callBarringVisible by rememberSaveable { mutableStateOf(false) }
+    var forceHomeNetwork by rememberSaveable { mutableStateOf(false) }
     var show4GForLteEnabled by rememberSaveable { mutableStateOf(false) }
     var hideEnhancedDataIconEnabled by rememberSaveable { mutableStateOf(false) }
     var is4GPlusEnabled by rememberSaveable { mutableStateOf(false) }
@@ -64,6 +66,8 @@ fun Config(navController: NavController, subId: Int) {
         supportWfcWifiOnly = moder.supportWfcWifiOnly
         vtEnabled = moder.isVtConfigEnabled
         ssOverUtEnabled = moder.ssOverUtEnabled
+        callBarringVisible = moder.callBarringVisible
+        forceHomeNetwork = moder.forceHomeNetwork
         show4GForLteEnabled = moder.isShow4GForLteEnabled
         hideEnhancedDataIconEnabled = moder.isHideEnhancedDataIconEnabled
         is4GPlusEnabled = moder.is4GPlusEnabled
@@ -205,6 +209,24 @@ fun Config(navController: NavController, subId: Int) {
             } else {
                 moder.updateCarrierConfig(CarrierConfigManager.KEY_CARRIER_SUPPORTS_SS_OVER_UT_BOOL, true)
                 moder.restartIMSRegistration()
+                true
+            }
+        }
+        BooleanPropertyView(label = stringResource(R.string.call_barring_visible), toggled = callBarringVisible) {
+            callBarringVisible = if (callBarringVisible) {
+                moder.updateCarrierConfig(CarrierConfigManager.KEY_CALL_BARRING_VISIBILITY_BOOL, false)
+                false
+            } else {
+                moder.updateCarrierConfig(CarrierConfigManager.KEY_CALL_BARRING_VISIBILITY_BOOL, true)
+                true
+            }
+        }
+        BooleanPropertyView(label = stringResource(R.string.force_home_network), toggled = forceHomeNetwork) {
+            forceHomeNetwork = if (forceHomeNetwork) {
+                moder.updateCarrierConfig(CarrierConfigManager.KEY_FORCE_HOME_NETWORK_BOOL, false)
+                false
+            } else {
+                moder.updateCarrierConfig(CarrierConfigManager.KEY_FORCE_HOME_NETWORK_BOOL, true)
                 true
             }
         }

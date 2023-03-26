@@ -265,6 +265,12 @@ class SubscriptionModer(val subscriptionId: Int) : Moder() {
     val ssOverUtEnabled: Boolean
         get() = this.getBooleanValue(CarrierConfigManager.KEY_CARRIER_SUPPORTS_SS_OVER_UT_BOOL)
 
+    val callBarringVisible: Boolean
+        get() = this.getBooleanValue(CarrierConfigManager.KEY_CALL_BARRING_VISIBILITY_BOOL)
+
+    val forceHomeNetwork: Boolean
+        get() = this.getBooleanValue(CarrierConfigManager.KEY_FORCE_HOME_NETWORK_BOOL)
+
     val isShow4GForLteEnabled: Boolean
         get() = this.getBooleanValue(CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL)
 

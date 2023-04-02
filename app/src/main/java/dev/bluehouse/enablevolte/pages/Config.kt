@@ -41,6 +41,7 @@ fun Config(navController: NavController, subId: Int) {
 
     var configurable by rememberSaveable { mutableStateOf(false) }
     var voLTEEnabled by rememberSaveable { mutableStateOf(false) }
+    var voLTEProvisioningRequired by rememberSaveable { mutableStateOf(false) }
     var voWiFiEnabled by rememberSaveable { mutableStateOf(false) }
     var voWiFiEnabledWhileRoaming by rememberSaveable { mutableStateOf(false) }
     var showVoWifiMode by rememberSaveable { mutableStateOf(false) }
@@ -58,6 +59,7 @@ fun Config(navController: NavController, subId: Int) {
 
     fun loadFlags() {
         voLTEEnabled = moder.isVoLteConfigEnabled
+        voLTEProvisioningRequired = moder.voLTEProvisioningRequired
         voWiFiEnabled = moder.isVoWifiConfigEnabled
         voWiFiEnabledWhileRoaming = moder.isVoWifiWhileRoamingEnabled
         showVoWifiMode = moder.showVoWifiMode
@@ -105,6 +107,15 @@ fun Config(navController: NavController, subId: Int) {
                 false
             } else {
                 moder.updateCarrierConfig(CarrierConfigManager.KEY_CARRIER_VOLTE_AVAILABLE_BOOL, true)
+                true
+            }
+        }
+        BooleanPropertyView(label = stringResource(R.string.volte_provisioning_required), toggled = voLTEProvisioningRequired) {
+            voLTEProvisioningRequired = if (voLTEProvisioningRequired) {
+                moder.updateCarrierConfig(CarrierConfigManager.KEY_CARRIER_VOLTE_PROVISIONING_REQUIRED_BOOL, false)
+                false
+            } else {
+                moder.updateCarrierConfig(CarrierConfigManager.KEY_CARRIER_VOLTE_PROVISIONING_REQUIRED_BOOL, true)
                 true
             }
         }

@@ -105,7 +105,6 @@ fun Config(navController: NavController, subId: Int) {
                 false
             } else {
                 moder.updateCarrierConfig(CarrierConfigManager.KEY_CARRIER_VOLTE_AVAILABLE_BOOL, true)
-                moder.restartIMSRegistration()
                 true
             }
         }
@@ -115,7 +114,6 @@ fun Config(navController: NavController, subId: Int) {
                 false
             } else {
                 moder.updateCarrierConfig(CarrierConfigManager.KEY_CARRIER_WFC_IMS_AVAILABLE_BOOL, true)
-                moder.restartIMSRegistration()
                 true
             }
         }
@@ -125,7 +123,6 @@ fun Config(navController: NavController, subId: Int) {
                 false
             } else {
                 moder.updateCarrierConfig(CarrierConfigManager.KEY_CARRIER_DEFAULT_WFC_IMS_ROAMING_ENABLED_BOOL, true)
-                moder.restartIMSRegistration()
                 true
             }
         }
@@ -135,7 +132,6 @@ fun Config(navController: NavController, subId: Int) {
                 false
             } else {
                 moder.updateCarrierConfig(CarrierConfigManager.KEY_CARRIER_VT_AVAILABLE_BOOL, true)
-                moder.restartIMSRegistration()
                 true
             }
         }
@@ -166,7 +162,6 @@ fun Config(navController: NavController, subId: Int) {
                 false
             } else {
                 moder.updateCarrierConfig(CarrierConfigManager.KEY_EDITABLE_WFC_MODE_BOOL, true)
-                moder.restartIMSRegistration()
                 true
             }
         }
@@ -176,7 +171,6 @@ fun Config(navController: NavController, subId: Int) {
                 false
             } else {
                 moder.updateCarrierConfig(CarrierConfigManager.KEY_EDITABLE_WFC_ROAMING_MODE_BOOL, true)
-                moder.restartIMSRegistration()
                 true
             }
         }
@@ -186,7 +180,6 @@ fun Config(navController: NavController, subId: Int) {
                 false
             } else {
                 moder.updateCarrierConfig(CarrierConfigManager.KEY_WFC_SPN_FORMAT_IDX_INT, 1)
-                moder.restartIMSRegistration()
                 true
             }
         }
@@ -196,7 +189,6 @@ fun Config(navController: NavController, subId: Int) {
                 false
             } else {
                 moder.updateCarrierConfig(CarrierConfigManager.KEY_CARRIER_WFC_SUPPORTS_WIFI_ONLY_BOOL, true)
-                moder.restartIMSRegistration()
                 true
             }
         }
@@ -206,7 +198,6 @@ fun Config(navController: NavController, subId: Int) {
                 false
             } else {
                 moder.updateCarrierConfig(CarrierConfigManager.KEY_CARRIER_SUPPORTS_SS_OVER_UT_BOOL, true)
-                moder.restartIMSRegistration()
                 true
             }
         }
@@ -248,6 +239,12 @@ fun Config(navController: NavController, subId: Int) {
         }
 
         HeaderText(text = stringResource(R.string.miscellaneous))
+        ClickablePropertyView(
+            label = stringResource(R.string.apply_settings),
+            value = stringResource(R.string.restart_ims),
+        ) {
+            moder.restartIMSRegistration()
+        }
         ClickablePropertyView(
             label = stringResource(R.string.reset_all_settings),
             value = stringResource(R.string.reverts_to_carrier_default),

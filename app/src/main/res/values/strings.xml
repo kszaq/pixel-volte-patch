@@ -37,6 +37,8 @@
     <string name="enable_enhanced_4g_lte_plus">Enable Enhanced 4G LTE (LTE+)</string>
     <string name="string_values">String Values</string>
     <string name="miscellaneous">Miscellaneous</string>
+    <string name="apply_settings">Apply Settings</string>
+    <string name="restart_ims">Restart IMS registration</string>
     <string name="reset_all_settings">Reset all settings</string>
     <string name="reverts_to_carrier_default">Reverts to carrier default</string>
     <string name="user_agent">User Agent</string>

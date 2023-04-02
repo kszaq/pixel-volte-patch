@@ -45,6 +45,7 @@ fun Config(navController: NavController, subId: Int) {
     var voWiFiEnabledWhileRoaming by rememberSaveable { mutableStateOf(false) }
     var showVoWifiMode by rememberSaveable { mutableStateOf(false) }
     var showVoWifiRoamingMode by rememberSaveable { mutableStateOf(false) }
+    var useHomeVoWiFiModeForRoaming by rememberSaveable { mutableStateOf(false) }
     var showVoWifiInNetworkName by rememberSaveable { mutableStateOf(false) }
     var supportWfcWifiOnly by rememberSaveable { mutableStateOf(false) }
     var vtEnabled by rememberSaveable { mutableStateOf(false) }
@@ -61,6 +62,7 @@ fun Config(navController: NavController, subId: Int) {
         voWiFiEnabledWhileRoaming = moder.isVoWifiWhileRoamingEnabled
         showVoWifiMode = moder.showVoWifiMode
         showVoWifiRoamingMode = moder.showVoWifiRoamingMode
+        useHomeVoWiFiModeForRoaming = moder.useHomeVoWiFiModeForRoaming
         showVoWifiInNetworkName = (moder.showVoWifiInNetworkName == 1)
         supportWfcWifiOnly = moder.supportWfcWifiOnly
         vtEnabled = moder.isVtConfigEnabled
@@ -156,6 +158,15 @@ fun Config(navController: NavController, subId: Int) {
                 false
             } else {
                 moder.updateCarrierConfig(CarrierConfigManager.KEY_EDITABLE_WFC_ROAMING_MODE_BOOL, true)
+                true
+            }
+        }
+        BooleanPropertyView(label = stringResource(R.string.use_vowifi_home_mode_for_roaming), toggled = useHomeVoWiFiModeForRoaming) {
+            useHomeVoWiFiModeForRoaming = if (useHomeVoWiFiModeForRoaming) {
+                moder.updateCarrierConfig(CarrierConfigManager.KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL, false)
+                false
+            } else {
+                moder.updateCarrierConfig(CarrierConfigManager.KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL, true)
                 true
             }
         }

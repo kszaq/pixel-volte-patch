@@ -53,7 +53,6 @@ fun Config(navController: NavController, subId: Int) {
     var forceHomeNetwork by rememberSaveable { mutableStateOf(false) }
     var show4GForLteEnabled by rememberSaveable { mutableStateOf(false) }
     var hideEnhancedDataIconEnabled by rememberSaveable { mutableStateOf(false) }
-    var is4GPlusEnabled by rememberSaveable { mutableStateOf(false) }
     var configuredUserAgent: String? by rememberSaveable { mutableStateOf("") }
 
     fun loadFlags() {
@@ -70,7 +69,6 @@ fun Config(navController: NavController, subId: Int) {
         forceHomeNetwork = moder.forceHomeNetwork
         show4GForLteEnabled = moder.isShow4GForLteEnabled
         hideEnhancedDataIconEnabled = moder.isHideEnhancedDataIconEnabled
-        is4GPlusEnabled = moder.is4GPlusEnabled
         configuredUserAgent = try {
             moder.userAgentConfig
         } catch (e: java.lang.NullPointerException) {
@@ -132,19 +130,6 @@ fun Config(navController: NavController, subId: Int) {
                 false
             } else {
                 moder.updateCarrierConfig(CarrierConfigManager.KEY_CARRIER_VT_AVAILABLE_BOOL, true)
-                true
-            }
-        }
-        BooleanPropertyView(label = stringResource(R.string.enable_enhanced_4g_lte_plus), toggled = is4GPlusEnabled) {
-            is4GPlusEnabled = if (is4GPlusEnabled) {
-                moder.updateCarrierConfig(CarrierConfigManager.KEY_EDITABLE_ENHANCED_4G_LTE_BOOL, false)
-                moder.updateCarrierConfig(CarrierConfigManager.KEY_ENHANCED_4G_LTE_ON_BY_DEFAULT_BOOL, false)
-                moder.updateCarrierConfig(CarrierConfigManager.KEY_HIDE_ENHANCED_4G_LTE_BOOL, true)
-                false
-            } else {
-                moder.updateCarrierConfig(CarrierConfigManager.KEY_EDITABLE_ENHANCED_4G_LTE_BOOL, true)
-                moder.updateCarrierConfig(CarrierConfigManager.KEY_ENHANCED_4G_LTE_ON_BY_DEFAULT_BOOL, true)
-                moder.updateCarrierConfig(CarrierConfigManager.KEY_HIDE_ENHANCED_4G_LTE_BOOL, false)
                 true
             }
         }

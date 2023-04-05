@@ -45,6 +45,7 @@ fun Config(navController: NavController, subId: Int) {
     var voNREnabled by rememberSaveable { mutableStateOf(false) }
     var voWiFiEnabled by rememberSaveable { mutableStateOf(false) }
     var voWiFiEnabledWhileRoaming by rememberSaveable { mutableStateOf(false) }
+    var preferUSSDOverIMS by rememberSaveable { mutableStateOf(false) }
     var showVoWifiMode by rememberSaveable { mutableStateOf(false) }
     var showVoWifiRoamingMode by rememberSaveable { mutableStateOf(false) }
     var useHomeVoWiFiModeForRoaming by rememberSaveable { mutableStateOf(false) }
@@ -64,6 +65,7 @@ fun Config(navController: NavController, subId: Int) {
         voNREnabled = moder.isVoNRConfigEnabled
         voWiFiEnabled = moder.isVoWifiConfigEnabled
         voWiFiEnabledWhileRoaming = moder.isVoWifiWhileRoamingEnabled
+        preferUSSDOverIMS = (moder.preferUSSDOverIMS == 1)
         showVoWifiMode = moder.showVoWifiMode
         showVoWifiRoamingMode = moder.showVoWifiRoamingMode
         useHomeVoWiFiModeForRoaming = moder.useHomeVoWiFiModeForRoaming
@@ -145,6 +147,15 @@ fun Config(navController: NavController, subId: Int) {
                 false
             } else {
                 moder.updateCarrierConfig(CarrierConfigManager.KEY_CARRIER_DEFAULT_WFC_IMS_ROAMING_ENABLED_BOOL, true)
+                true
+            }
+        }
+        BooleanPropertyView(label = stringResource(R.string.prefer_ussd_over_ims), toggled = preferUSSDOverIMS) {
+            preferUSSDOverIMS = if (preferUSSDOverIMS) {
+                moder.updateCarrierConfig(CarrierConfigManager.KEY_CARRIER_USSD_METHOD_INT, 0)
+                false
+            } else {
+                moder.updateCarrierConfig(CarrierConfigManager.KEY_CARRIER_USSD_METHOD_INT, 1)
                 true
             }
         }

@@ -16,6 +16,7 @@
     <string name="enable_vonr">Enable VoNR (5G)</string>
     <string name="enable_vowifi">Enable VoWiFi</string>
     <string name="enable_vowifi_while_roamed">Enable VoWiFi while Roamed</string>
+    <string name="prefer_ussd_over_ims">Prefer USSD over IMS</string>
     <string name="show_vowifi_preference_in_settings">Show VoWiFi preference in Settings</string>
     <string name="show_vowifi_roaming_preference_in_settings">Show VoWiFi Roaming preference in Settings</string>
     <string name="use_vowifi_home_mode_for_roaming">Use home VoWiFi mode for roaming</string>

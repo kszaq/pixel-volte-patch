@@ -57,6 +57,7 @@ fun Config(navController: NavController, subId: Int) {
     var forceHomeNetwork by rememberSaveable { mutableStateOf(false) }
     var show4GForLteEnabled by rememberSaveable { mutableStateOf(false) }
     var hideEnhancedDataIconEnabled by rememberSaveable { mutableStateOf(false) }
+    var blockIPV6OnlyWifi by rememberSaveable { mutableStateOf(false) }
     var configuredUserAgent: String? by rememberSaveable { mutableStateOf("") }
 
     fun loadFlags() {
@@ -77,6 +78,11 @@ fun Config(navController: NavController, subId: Int) {
         forceHomeNetwork = moder.forceHomeNetwork
         show4GForLteEnabled = moder.isShow4GForLteEnabled
         hideEnhancedDataIconEnabled = moder.isHideEnhancedDataIconEnabled
+        blockIPV6OnlyWifi = try {
+            moder.blockIPV6OnlyWifi
+        } catch (e: java.lang.NullPointerException) {
+            false
+        }
         configuredUserAgent = try {
             moder.userAgentConfig
         } catch (e: java.lang.NullPointerException) {
@@ -263,6 +269,15 @@ fun Config(navController: NavController, subId: Int) {
                 false
             } else {
                 moder.updateCarrierConfig(CarrierConfigManager.KEY_HIDE_LTE_PLUS_DATA_ICON_BOOL, true)
+                true
+            }
+        }
+        BooleanPropertyView(label = stringResource(R.string.block_ipv6_only_wifi), toggled = blockIPV6OnlyWifi) {
+            blockIPV6OnlyWifi = if (blockIPV6OnlyWifi) {
+                moder.updateCarrierConfig("qns.block_ipv6_only_wifi_bool", false)
+                false
+            } else {
+                moder.updateCarrierConfig("qns.block_ipv6_only_wifi_bool", true)
                 true
             }
         }
